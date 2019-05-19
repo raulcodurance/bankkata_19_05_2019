@@ -15,9 +15,11 @@ public class Account {
 
     public void withdrawal(int amount) {
 
+        transactionRepository.addWithdrawal(amount);
     }
 
     public void printStatement() {
 
+        transactionRepository.allTransactions();
     }
 }
