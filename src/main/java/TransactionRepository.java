@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class TransactionRepository {
     public void addDeposit(int amount) {
         throw new UnsupportedOperationException();
@@ -7,7 +9,7 @@ public class TransactionRepository {
         throw new UnsupportedOperationException();
     }
 
-    public void allTransactions() {
+    public List<Transaction> allTransactions() {
         throw new UnsupportedOperationException();
     }
 }

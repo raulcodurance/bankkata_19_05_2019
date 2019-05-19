@@ -15,12 +15,14 @@ public class BankStatementFeature {
     @Mock Console console;
     private Account account;
     private TransactionRepository transactionRepository;
+    private StatementPrinter statementPrinter;
 
     @Before
     public void setUp() throws Exception {
 
+        this.statementPrinter = new StatementPrinter();
         this.transactionRepository = new TransactionRepository();
-        this.account = new Account(transactionRepository);
+        this.account = new Account(transactionRepository, statementPrinter);
     }
 
     @Test
