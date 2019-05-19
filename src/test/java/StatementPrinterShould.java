@@ -5,6 +5,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -32,5 +33,19 @@ public class StatementPrinterShould {
         statementPrinter.print(transactions);
 
         verify(console).print("date || amount || balance");
+    }
+
+    @Test
+    public void print_statement_transaction() {
+
+        List<Transaction> transactions = Collections.singletonList(new Transaction(100, "16/05/2019"));
+
+        statementPrinter.print(transactions);
+
+        verify(console).print("date || amount || balance");
+        verify(console).print("16/05/2019 || 100 || 100");
+
+
+
     }
 }

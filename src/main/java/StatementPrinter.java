@@ -1,5 +1,8 @@
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.lang.Math.abs;
@@ -16,17 +19,16 @@ public class StatementPrinter {
     public void print(List<Transaction> transactions) {
 
         console.print("date || amount || balance");
-        int balance = 0;
+        AtomicInteger balance = new AtomicInteger(0);
 
-        List<Transaction> orderedTransactions = transactions.stream().sorted(Comparator.comparing(Transaction::date)).collect(toList());
-        for(Transaction transaction : orderedTransactions){
-
-            balance += transaction.amount();
-
-            // 14/01/2012 || || 500.00 || 2500.00
-            console.print(transaction.date() + " || " + abs(transaction.amount()) + " || " + balance );
+        transactions.stream()
+                .sorted(Comparator.comparing(Transaction::date))
+                .map(transaction -> transaction.date() + " || " + abs(transaction.amount()) + ".00 || " + balance.addAndGet(transaction.amount()) + ".00")
+                .collect(Collectors.toCollection(LinkedList::new))
+                .descendingIterator()
+                .forEachRemaining(line -> console.print(line));
         }
 
-    }
+
 
 }
