@@ -34,4 +34,14 @@ public class TransactionRepositoryShould {
         assertThat(transactionRepository.allTransactions().get(0), is(new Transaction(100, "19/05/2019")));
 
     }
+
+    @Test
+    public void store_a_withdrawal_transaction() {
+
+        given(timer.todayAsString()).willReturn("19/05/2019");
+        transactionRepository.addWithdrawal(100);
+
+        assertThat(transactionRepository.allTransactions().size(), is(1));
+        assertThat(transactionRepository.allTransactions().get(0), is(new Transaction(-100, "19/05/2019")));
+    }
 }

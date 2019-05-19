@@ -14,12 +14,11 @@ public class TransactionRepository {
 
     public void addDeposit(int amount) {
 
-
         transactions.add(new Transaction(amount, timer.todayAsString()));
     }
 
     public void addWithdrawal(int amount) {
-        throw new UnsupportedOperationException();
+        transactions.add(new Transaction(-amount, timer.todayAsString()));
     }
 
     public List<Transaction> allTransactions() {
