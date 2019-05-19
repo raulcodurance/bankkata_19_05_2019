@@ -1,8 +1,21 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TransactionRepository {
+    private Timer timer;
+    private List<Transaction> transactions;
+
+    public TransactionRepository(Timer timer) {
+
+        this.transactions = new ArrayList<>();
+        this.timer = timer;
+    }
+
     public void addDeposit(int amount) {
-        throw new UnsupportedOperationException();
+
+
+        transactions.add(new Transaction(amount, timer.todayAsString()));
     }
 
     public void addWithdrawal(int amount) {
@@ -10,6 +23,8 @@ public class TransactionRepository {
     }
 
     public List<Transaction> allTransactions() {
-        throw new UnsupportedOperationException();
+
+        return Collections.unmodifiableList(transactions);
+
     }
 }

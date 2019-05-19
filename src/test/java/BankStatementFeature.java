@@ -16,12 +16,14 @@ public class BankStatementFeature {
     private Account account;
     private TransactionRepository transactionRepository;
     private StatementPrinter statementPrinter;
+    private Timer timer;
 
     @Before
     public void setUp() throws Exception {
 
+        this.timer = new Timer();
         this.statementPrinter = new StatementPrinter();
-        this.transactionRepository = new TransactionRepository();
+        this.transactionRepository = new TransactionRepository(timer);
         this.account = new Account(transactionRepository, statementPrinter);
     }
 
