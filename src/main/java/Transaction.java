@@ -1,5 +1,7 @@
 import java.util.Objects;
 
+import static java.lang.Math.abs;
+
 public class Transaction {
     private final int amount;
     private final String date;
@@ -22,5 +24,13 @@ public class Transaction {
     @Override
     public int hashCode() {
         return Objects.hash(amount, date);
+    }
+
+    public String date() {
+       return this.date;
+    }
+
+    public int amount() {
+        return this.amount;
     }
 }

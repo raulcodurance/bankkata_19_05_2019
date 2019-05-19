@@ -22,7 +22,7 @@ public class BankStatementFeature {
     public void setUp() throws Exception {
 
         this.timer = new Timer();
-        this.statementPrinter = new StatementPrinter();
+        this.statementPrinter = new StatementPrinter(console);
         this.transactionRepository = new TransactionRepository(timer);
         this.account = new Account(transactionRepository, statementPrinter);
     }
